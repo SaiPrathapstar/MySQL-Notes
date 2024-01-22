@@ -1,0 +1,821 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Azure Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bf859c15-5bd6-4291-9513-930bc14b51f3" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1633114128174-2f8aa49759b0?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/800px-Microsoft_Azure.svg.png"/></div><h1 class="page-title">Azure Notes</h1><p class="page-description"></p></header><div class="page-body"><p id="b46f0a01-ab35-4bca-b521-0b2218218e68" class=""><strong>AZ 900 certification: it has the basics of Azure</strong></p><p id="5710e155-7985-431a-82dc-6214e6f8fab0" class=""><strong>AZ500: It has data analysis</strong></p><p id="b581166c-0041-4580-b1ac-53114f72afb8" class=""><strong>DP 203: It is Data Engineering. </strong><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/dp-203/?tab=tab-learning-paths">Tutorials</a><strong>, </strong><a href="https://github.com/MicrosoftLearning/dp-203-azure-data-engineer/tree/master/Allfiles/labs">labs</a></p><ul id="faeb6eda-8d36-4281-9ef3-c042b4acf172" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">For DE we must know: ADLS, ADF, Python, SQL, Databricks, Synapse, Tableau/Power B</span><div class="indented"></div></li></ul><p id="982f6a16-a5f5-4ee5-ac65-10660b9e6986" class=""><strong>Contents</strong></p><nav id="38a975f3-6923-4f0c-9edd-4d883bf18947" class="block-color-blue table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bb5c7364-09ad-4cd6-8f26-26fba7429901">Data is stored in</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#04fc2cc7-8cee-43da-b57f-29cc6e0b054a"><strong>Cloud Computing</strong>: </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cf0de82c-9d1e-46e8-ae4f-a4506c55ecc0">Storage account</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c82d4256-1249-4817-830e-85eb2708fdd8"><strong>Azure architectural components</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#27185336-6702-4497-8cef-3b1943a3dd32">Azure Data Lake Storage</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d1bed199-0709-458d-b019-2871d3265138">Azure Synapse Analytics</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b860e31a-6efa-4696-b14f-6efece23ea1f">Azure SQL</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d7ff226b-8e0e-4d2b-b900-f51706fe39ff">Non-relational data in Azure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#adeb9f33-c1a5-4c1a-a251-f0db68eaa30e"><strong>Azure Data Factory</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4512e699-44f1-4d50-b862-222b58cab517">Synapse ADF:</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fbcfef9b-86a7-4a35-b101-a9bfeecb041a">Spark in Synapse</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6549f7ca-0657-401e-9404-34de6f42b435">Azure SQL in Synapse</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e3c6514c-e678-427e-955b-959cd4c2dd81">Data warehouse</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8b32b27a-413e-4b42-829c-9d9b030e99be">External table</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fabbbfc5-8f63-404c-b832-bd98db2d28c3">Loading data into a warehouse using SQL operations</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#485891ea-3297-431b-94b2-f4fa71c2e347">Cosmos DB</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3703d8da-828d-4444-9032-3a1ffb2deadc">HTAP (Hybrid Transactional and processing patterns)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#751a5db2-9290-4e4d-bd9e-300a223a5d16">Azure DataBricks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7e8769e4-ab54-4eea-8dd5-4e23ef99c139">Data Lakehouse</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8d04bb7c-3a61-4f88-84c9-3c5d04b99794"><strong>Delta Lake</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#23e050bd-6c17-4cb8-bb8e-6ed6839b975f">Azure Key Vault</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#855df80b-ee46-4c1f-bb55-0c348a9a48ad">Azure Stream Analytics</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bc573207-6a68-4ea3-9b96-e9ff420a267d">Creating Event and hub</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fa66d02e-ea70-4ad1-870b-fe3b7cf62b1d">Azure Functions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6b660eb2-57ca-45dc-9335-e9724cd1eb00">Batch processing and stream processing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b03762de-5a50-49d6-a0a2-9907b4e7be95">Auto loader</a></div></nav><p id="61d2d8ee-6544-4365-82ae-275ea6125e5a" class=""><strong>Structured data</strong></p><ul id="16bc4143-9c45-49d0-b797-8a6a3b47885b" class="bulleted-list"><li style="list-style-type:disc">has schema,</li></ul><ul id="e118ec6f-2ca1-4bad-a42a-cc409cba127a" class="bulleted-list"><li style="list-style-type:disc">attributes, elements</li></ul><ul id="26e97a33-62e9-4cb2-86c2-fd36d625c7f9" class="bulleted-list"><li style="list-style-type:disc">Eg: Tables</li></ul><p id="4a9677d0-5202-42b5-80eb-2a51f7b691ca" class=""><strong>Semi-structured</strong></p><ul id="19339dee-97fe-4825-8b4e-2f1fcf4db125" class="bulleted-list"><li style="list-style-type:disc">has sequence data types: dictionary, structure</li></ul><ul id="67444ede-91af-46aa-9039-94d895b106bd" class="bulleted-list"><li style="list-style-type:disc">Eg: XML, JSON, CSV, Text</li></ul><p id="280b7089-b024-4e2a-8afe-57e56e9e96c3" class=""><strong>Unstructured</strong></p><ul id="c78600ae-3676-4937-8fca-960c3d891981" class="bulleted-list"><li style="list-style-type:disc">Authentication: logging in using the credentials</li></ul><ul id="5972e205-9e3d-4f24-a5eb-d06e2c0ba2fe" class="bulleted-list"><li style="list-style-type:disc">Authorization: privileges</li></ul><ul id="699c5f8e-e05e-4aec-929c-1553e70be6f7" class="bulleted-list"><li style="list-style-type:disc">Eg: Customer reviews, audio, video and image</li></ul><h3 id="bb5c7364-09ad-4cd6-8f26-26fba7429901" class="">Data is stored in</h3><p id="f8c2e7c8-d07c-4eb2-8a59-65b6db9c4bcc" class=""><strong>Type1:</strong> <strong>Files</strong></p><p id="d6ce2d37-e23f-4196-a5ab-14fd071dd291" class="">Delimited text, JSON, XML, BLOB (Binary large objects), Optimized file formats (parquet, ORC, Avro)</p><p id="0ec9e368-d677-4927-a737-5b21caec92d8" class=""><strong>Type 2:</strong> <strong>Databases</strong></p><ol type="1" id="c130d6eb-b8df-4952-b01b-b180a0c98e93" class="numbered-list" start="1"><li>Relational: Tables</li></ol><ol type="1" id="dbb1da74-3236-46f8-8bf2-06dd99bf96a6" class="numbered-list" start="2"><li>Non-Relational: Key-value pair, Document, Column family, Graph</li></ol><p id="427cf844-be40-4f27-a9ac-55432575b748" class=""><strong>File formats:</strong></p><ul id="f6f77d38-328a-482d-af4b-a5841ff94e15" class="bulleted-list"><li style="list-style-type:disc">Parquet: semi-structured, column-oriented</li></ul><ul id="dc4de537-aa63-43f7-8415-bcdfb254e3e2" class="bulleted-list"><li style="list-style-type:disc">orc: Column-oriented</li></ul><ul id="84b22240-4e32-4385-a795-c73ae8ac0ad1" class="bulleted-list"><li style="list-style-type:disc">Avro: Row oriented</li></ul><p id="c9f37d2b-c561-4f1b-a592-66e28fda12db" class=""><strong>OS:</strong></p><ul id="529779b5-b92e-4cb3-b520-1aef44ca1059" class="bulleted-list"><li style="list-style-type:disc">Server OS: windows server, Linux server</li></ul><ul id="88250adb-fcfc-41e2-a248-88682314b176" class="bulleted-list"><li style="list-style-type:disc">Client OS: Windows, Linux, etc.</li></ul><ul id="98babe3f-bb3e-496c-b96f-25dd4040fba2" class="bulleted-list"><li style="list-style-type:disc">We connect the clients to the server using TCP/IP. We use SQL CMD or SSMS as tools in the client to connect to the server.</li></ul><h3 id="04fc2cc7-8cee-43da-b57f-29cc6e0b054a" class=""><strong>Cloud Computing</strong>: </h3><ul id="7bf9a668-716d-4e43-86ce-ee498197e10f" class="bulleted-list"><li style="list-style-type:disc">It is the delivery of computing services over the internet, enabling faster innovation, flexible resources, and economies of scale. It has computing, networking, storage and analytics.</li></ul><p id="9267e989-8a14-4d98-a8c2-0edec282d261" class=""><strong>Public cloud</strong>:</p><ol type="1" id="28c4b6f5-f41a-4aea-807b-e06380b3624b" class="numbered-list" start="1"><li>Owned by cloud services or hosting provider</li></ol><ol type="1" id="e80a88d2-648e-4a95-a813-37c2f60e6a36" class="numbered-list" start="2"><li>Provides resources and services to multiple organizations and users</li></ol><ol type="1" id="47e17005-8b99-47b4-819f-51df853fe7d1" class="numbered-list" start="3"><li>Accessed via secure network connection (over the internet)</li></ol><ol type="1" id="ceea7cc2-58cc-42a1-b4fd-f5449148a7ed" class="numbered-list" start="4"><li>No expenditures to scale up</li></ol><ol type="1" id="a0324759-629a-417d-822a-7bb787c3fe50" class="numbered-list" start="5"><li>apps can be quickly provisioned and unprovisioned</li></ol><ol type="1" id="0faeefd9-5528-4784-8f90-7fe528958d24" class="numbered-list" start="6"><li>org can pay as they use</li></ol><p id="5e57016f-8906-4063-a898-d05ee8ba3c2c" class=""><strong>Private cloud</strong>:</p><ol type="1" id="9b92addb-6341-489d-adcf-b7653ef2c34f" class="numbered-list" start="1"><li>Organizations create a cloud environment in their data centre</li></ol><ol type="1" id="59222aff-f7ee-45ec-bc30-d7e4f19cf8af" class="numbered-list" start="2"><li>Org is responsible for operating the services it provides</li></ol><ol type="1" id="65336b87-5edf-4c95-afec-6667139dfede" class="numbered-list" start="3"><li>Does not provide access to users outside of the org</li></ol><ol type="1" id="1831208e-1350-49e5-90b9-ebcde5c1a6e2" class="numbered-list" start="4"><li>Hardware should be purchased for start-up and maintenance</li></ol><ol type="1" id="43fc7d6a-cd01-49cc-91a2-81e69a3966a2" class="numbered-list" start="5"><li>Org has complete control over resources and security</li></ol><ol type="1" id="f63444d4-1cd6-445a-ae10-cefffb903b42" class="numbered-list" start="6"><li>Orgs are responsible for h/w maintenance and updates</li></ol><p id="412dc501-025e-46a5-967b-040e63dffb96" class=""><strong>Hybrid cloud</strong>:</p><ol type="1" id="94f92fc3-e198-486a-86e6-1990baf60d96" class="numbered-list" start="1"><li>Combines public and private clouds to allow applications on both of them</li></ol><ol type="1" id="346b577e-f1a5-4176-9a99-b0ec1eb0b6be" class="numbered-list" start="2"><li>provides most flexibility</li></ol><ol type="1" id="c19b5652-5626-4796-8dcc-dd11abaae140" class="numbered-list" start="3"><li>Orgs determine where to run their apps</li></ol><ol type="1" id="8326f257-58e4-44e9-a9b6-3d0d61a24db7" class="numbered-list" start="4"><li>Orgs take care of the security and resources</li></ol><p id="752eb912-1c73-48e2-ac31-0f37ddae9226" class=""><strong>Benefits</strong>:</p><p id="525eb3d5-4bfd-4d76-aa8b-92454ba60fe9" class="">High availability, scalability, global reach, agility, disaster recovery, fault tolerance, elasticity, customer latency capabilities, predictive cost considerations, and security.</p><p id="e4e213f6-bb4f-48e2-992a-a2ad5cab23d1" class="">SQL server database files:</p><p id="aa29b3f0-42a0-4804-a83a-0654c522b090" class="">Data Files: .mdf (master data file, 1 file), .ndf (node data file, many files)</p><p id="dae75e68-93f3-47cc-8760-cd7c6968a17a" class="">Logfile: .ldf</p><p id="49ebae21-c484-40ba-9c95-1998ec15f6dd" class="">Cloud services:</p><p id="a87db957-f318-4f9e-ac28-8e7e1f8340a7" class="">Iaas, Saas, Paas,</p><p id="1458ae92-4b3f-4993-be4b-3df9dbe49dcd" class="">IaaS: Built pay-as-you-go infrastructure.</p><p id="fb6e7060-48e8-49e4-8974-f75ab9a26c89" class="">Serverless computes: It has a server but they are not going to bill on the server, they bill on the number of requests you made to the server (for a web server).</p><h3 id="cf0de82c-9d1e-46e8-ae4f-a4506c55ecc0" class="">Storage account</h3><p id="644d51a0-e0d8-4f79-8549-ea739128555b" class="">It is a container to store the data. Storage accounts are replicated across multiple servers to ensure high availability. You can control the access using RBAC(role-based access control). </p><p id="0039aa38-5621-4e87-9ce6-8ebad4c8f901" class="">There are some <strong>types of files</strong> that can be stored at the storage account level. They are:</p><ul id="4f51f1c1-4454-4340-a834-074ea1934186" class="bulleted-list"><li style="list-style-type:disc">Blob: Used to store unstructured, video, audio, text, docs etc</li></ul><ul id="d6257d0d-9a72-4990-a15f-2972fea0bd15" class="bulleted-list"><li style="list-style-type:disc">File: a central location to share all the files in the project. </li></ul><ul id="e4b807ad-59a9-44cd-927c-67e71ad1f6a9" class="bulleted-list"><li style="list-style-type:disc">Table: used to store the structured data</li></ul><ul id="1177136b-1621-471f-918f-eea0624a11c9" class="bulleted-list"><li style="list-style-type:disc">queue: used to store tasks like things</li></ul><p id="5753d0d3-869d-4313-be90-1f474e2bc5a8" class=""><strong>Account type</strong>: The account type is used to specify the type type of usage. They are: Blob, general purpose v1, general purpose v2.</p><p id="563fe156-1993-483f-9331-22716cc9f3f7" class=""><strong>Access tier</strong>: Hot tier, cold tier, archive with decreasing cost and increasing latency respectively</p><h3 id="c82d4256-1249-4817-830e-85eb2708fdd8" class=""><strong>Azure architectural components</strong></h3><p id="a75b061b-daf5-406e-b8f8-dc1d160a259b" class="">The core architectural components of Azure may be broken down into two main groupings: the physical infrastructure, and the management infrastructure.</p><p id="2bc2a1eb-8435-4443-b1a4-a7a87cf22907" class=""><strong>Physical Infra</strong>: They are data centres. Datacenters are grouped into Azure Regions or Azure Availability Zones.</p><p id="60f92145-fdc2-4309-8450-28fdd7543c66" class="">Region: A region is a geographical area on the planet that contains at least one, but potentially multiple datacenters that are nearby and networked together with a low-latency network.</p><p id="d4818787-4c54-4ab7-9aab-12e6164539d8" class="">Availability zone: Availability zones are physically separate data centres within an Azure region. Each availability zone is made up of one or more data centres equipped with independent power, cooling, and networking. An availability zone is set up to be an isolation boundary. If one zone goes down, the other continues working. Availability zones are connected through high-speed, private fibre-optic networks.</p><p id="65af34f4-0886-4edf-a871-8f5e7e639d0d" class=""><strong>ETL Process:</strong></p><p id="6948dee7-e8f9-4614-947e-742f5b838b9a" class="">Staging</p><ol type="1" id="4a1df091-aeb6-43b4-b674-e9f0ce41b157" class="numbered-list" start="1"><li>What data should be staged</li></ol><ol type="1" id="050e57bd-9e43-4e50-9b09-c97cd6eb108b" class="numbered-list" start="2"><li>Staging data format</li></ol><p id="4ad01c0a-392d-41e9-b636-7ccce592f827" class="">Required transformations:</p><ol type="1" id="60e1354a-653e-4e51-a30f-ccfedc9ecfbe" class="numbered-list" start="1"><li>Transformations during extraction versus data flow transformations</li></ol><p id="cce4e75f-4797-4076-80d5-8cd45c24ff26" class="">Incremental ETL:</p><ol type="1" id="c79dae82-69bf-4213-ae21-33ee3996eac1" class="numbered-list" start="1"><li>Identifying data exchanges for extraction</li></ol><ol type="1" id="d90d9216-f4ed-498b-be94-b5eafd95cd13" class="numbered-list" start="2"><li>Inserting or updating when loading</li></ol><p id="33fc34c4-bef0-454e-bdd8-432cb50686a4" class="">Tenant Account → Management groups → resource groups → storage account → resource</p><p id="51fedd0e-d820-470d-b34c-082e04bbf12b" class="block-color-blue">
+</p><p id="e724fe54-0e31-41ed-9710-d081e7bae267" class="block-color-blue"><a href="https://learn.microsoft.com/en-us/powershell/azure/install-azps-windows?view=azps-10.4.1&amp;tabs=windowspowershell&amp;pivots=windows-psgallery">Install Azure PowerShell</a></p><p id="e38be5e5-7181-4dda-9701-e20b2578a5f2" class="block-color-blue"><a href="https://learn.microsoft.com/en-us/azure/azure-sql/database/scripts/create-and-configure-database-powershell?view=azuresql">Create Azure SQL using CLI</a>: Create a PowerShell ISE script.</p><figure id="74d95cfd-f1e3-4035-9316-a2fa91f94e90" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image1.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image1.png"/></a></figure><figure id="75528645-07e9-4256-85eb-eaeedc60d44c" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image2.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image2.png"/></a></figure><p id="4f512c7b-6524-4793-9e8a-74881101cc10" class=""><strong>VM</strong></p><ul id="7ddca9fa-4e8e-434c-b952-f431a49307ca" class="bulleted-list"><li style="list-style-type:disc">Create a VM to run software in it, when you create a VM it will provide OS, storage and computing power. We can run all the services we need. We should enable RDC to connect to the VM through IP Address.</li></ul><ul id="657bb95c-7b78-4aba-97ca-74e6f7835058" class="bulleted-list"><li style="list-style-type:disc">It is a PAAS.</li></ul><ul id="1efd541a-ad28-46e1-a8e4-2ffabf3a1c2a" class="bulleted-list"><li style="list-style-type:disc">If you are just using the VM as a server, then you can create a server only without a VM which will decrease the cost. The server has storage and computing power.</li></ul><ul id="4d113b3f-7325-4076-99cb-6b1289681b4f" class="bulleted-list"><li style="list-style-type:disc">Server Roles: Sysadmin user are super user.</li></ul><ul id="cf142c5c-53e2-4498-976d-004e3fe3ffc0" class="bulleted-list"><li style="list-style-type:disc">In VM by default, the f drive is used to store the data and the g drive for logs.</li></ul><p id="de7e32c3-76af-43a9-8135-4e37556cf572" class="">Serverless computing: It doesn’t need to have a server, the computer is just used when we do some computing work it temporarily uses the compute, and it costs much less than creating a compute resource.</p><p id="31bf9bb8-f7ee-4d33-af4c-1b08b8b30ba9" class=""><strong>Data Warehouse vs Data Lake</strong>: Data warehouse is a database used to store analytical data. data lake is analytical data stored in files and it is a distributed storage for massive scalability.</p><ul id="803c298c-248a-47d0-9b47-8d9995299476" class="bulleted-list"><li style="list-style-type:disc">Operational data: Transactional data used by applications i.e., OLTP.</li></ul><ul id="cd70f54b-2423-4a13-9fd3-69674ec91253" class="bulleted-list"><li style="list-style-type:disc">Analytical data: Optimized for analysis and reporting i.e., OLAP.</li></ul><h3 id="27185336-6702-4497-8cef-3b1943a3dd32" class="">Azure Data Lake Storage</h3><ul id="ecf7770b-8da0-4cde-aa6f-c30fb47e7bba" class="bulleted-list"><li style="list-style-type:disc">It is commonly used for bringing all the data from different sources into a single place</li></ul><ul id="6f20365f-3e8a-4673-b433-31ae090df8af" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="b10b7fe8-735c-4fd5-a637-019b359ae227" class=""><strong>Data Engineering using Azure</strong>:</p><figure id="729bba5e-5794-4ea5-a655-62978a081686" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image3.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image3.png"/></a></figure><ul id="1f4bed0b-72a3-493f-ae0c-3114515db271" class="bulleted-list"><li style="list-style-type:disc">Step 1: We can collect the operational data from different sources like SQL, Live data sources etc.</li></ul><ul id="a4c4dcdd-7362-49ed-957d-45429f74fc22" class="bulleted-list"><li style="list-style-type:disc">Step 2: We do the collecting process using Azure Synapse, Azure Stream Analytics and Azure Data Factory.</li></ul><ul id="1aa83a77-3340-4999-9c73-6c5edd6eb216" class="bulleted-list"><li style="list-style-type:disc">Step 3: Then we can do the analytical data processing using the Azure Data Lake Gen2 and Data Bricks.</li></ul><ul id="020f28e4-8abd-431e-93af-0a460ad5ac95" class="bulleted-list"><li style="list-style-type:disc">Step 4: We can do the data modelling using Microsoft Power BI within the Azure cloud.</li></ul><p id="47d3afb2-c057-4e21-8f24-c51297e38ba9" class=""><strong>Azure Data Lake Gen2:</strong></p><ul id="d229db68-8551-406c-b854-f40d0e31b43a" class="bulleted-list"><li style="list-style-type:disc">It is a distributed cloud storage. </li></ul><ul id="ed4466ad-ea18-458f-af1f-a31b15d2c1a6" class="bulleted-list"><li style="list-style-type:disc">It has HDFS compatibility.</li></ul><ul id="628012f2-8717-434a-911e-8d71e46fe170" class="bulleted-list"><li style="list-style-type:disc">It can have the folder and file-level permissions.</li></ul><ul id="60ac35d5-7dc4-4ec9-b72a-7b34d7781f4e" class="bulleted-list"><li style="list-style-type:disc">It is built on Azure storage and it provides high performance and scalability.</li></ul><ul id="98a33012-ae53-4f11-a3c5-4cf71d714ebf" class="bulleted-list"><li style="list-style-type:disc">It provides data redundancy through built-in replication.</li></ul><ul id="b28c11ca-67e6-4e1f-a747-065dc919b820" class="bulleted-list"><li style="list-style-type:disc">Blobs can also be put in a virtual directory but the folder level operations are not possible.</li></ul><p id="a6a54a77-aa8d-4f74-b545-fb8195ab7e42" class="">
+</p><h3 id="d1bed199-0709-458d-b019-2871d3265138" class="">Azure Synapse Analytics</h3><ul id="785c1c43-3b81-4623-86f1-32a7153cf013" class="bulleted-list"><li style="list-style-type:disc">Large-scale data warehousing</li></ul><ul id="4a2f1fd4-c444-4c9b-87b5-69654809f8b2" class="bulleted-list"><li style="list-style-type:disc">Advanced analytics</li></ul><ul id="b724c6bf-0796-4542-bc8e-530bb3a25a6e" class="bulleted-list"><li style="list-style-type:disc">Data exploration and discovery</li></ul><ul id="6d7ac740-877c-47d6-8260-602f4089179f" class="bulleted-list"><li style="list-style-type:disc">Real-time analytics</li></ul><ul id="c98454df-f328-417a-802e-5a6810986b21" class="bulleted-list"><li style="list-style-type:disc">Data integration</li></ul><ul id="dd2bb95b-9d14-4105-ad74-bd6ddb4864bf" class="bulleted-list"><li style="list-style-type:disc">Integration analytics</li></ul><ul id="6610d7a4-1d21-4a04-a3d9-1bee4d8311e6" class="bulleted-list"><li style="list-style-type:disc">Connect to data lake storage using linked services</li></ul><ul id="b94dcaf3-bcae-43d6-b017-f619208234dd" class="bulleted-list"><li style="list-style-type:disc">The services Synapse Analytics provides<ol type="1" id="162a1c0a-fae9-4146-bfea-6ec0e5be9f2e" class="numbered-list" start="1"><li>Working with files in Data Lake<ol type="a" id="80103463-493d-49a3-ac1f-0bde632a4253" class="numbered-list" start="1"><li>Can connect to files and get the data using linked services</li></ol><ol type="a" id="fb278a1d-c7fe-471a-8c74-d5286186f2bb" class="numbered-list" start="2"><li>Each Azure synapse analytics has its own data lake</li></ol></li></ol><ol type="1" id="179c76f0-0166-45d1-8236-792d2b72bba8" class="numbered-list" start="2"><li>Ingest data with pipelines (ADF)<ol type="a" id="d4423e01-5db6-45d3-abc7-07cdc2ff207c" class="numbered-list" start="1"><li>It has pipeline functionality which is built on ADF</li></ol><ol type="a" id="df457a95-59d4-44bc-a6c2-440b8b83df0b" class="numbered-list" start="2"><li>We can orchestrate activities to E, T, L</li></ol><ol type="a" id="95d0c676-540a-40d6-9931-8cb8be4a67d3" class="numbered-list" start="3"><li>We can also integrate it with other data services</li></ol></li></ol><ol type="1" id="3dcfb3a2-9643-4c3e-9c17-8231f3aefba9" class="numbered-list" start="3"><li>Query and manipulate data using SQL<ol type="a" id="31dbf654-ddd2-4d2f-ae29-554e34be42af" class="numbered-list" start="1"><li>It provides a built-in serverless SQL pool for data exploration and analysis of files in the data lake</li></ol><ol type="a" id="a2871a1b-a8b8-4faa-ac56-6f450ca30e2f" class="numbered-list" start="2"><li>It also provides a dedicated SQL pool to host large-scale relational data warehouses.</li></ol></li></ol><ol type="1" id="7844805e-74b1-4c7a-a08e-ed82cfb070e5" class="numbered-list" start="4"><li>We can process and analyze data with Spark<ol type="a" id="3a382d23-0138-4d0e-b862-5287b7701d7f" class="numbered-list" start="1"><li>It provides distributed processing </li></ol><ol type="a" id="64890948-4d5d-42cf-ad44-9fab43edd53a" class="numbered-list" start="2"><li>It has common libraries and multiple programming language support.</li></ol><ol type="a" id="5a1ff052-9fa4-44df-8d7d-6c772621ac41" class="numbered-list" start="3"><li>It has integrated notebooks to work</li></ol></li></ol><ol type="1" id="7f3b6fcc-6b52-4811-8ec9-dc79dc49c8a8" class="numbered-list" start="5"><li>Explore the data using Data Explorer<ol type="a" id="5bd0ad5e-2ede-478b-b4aa-631e6ab7edff" class="numbered-list" start="1"><li>High-performance real-time analytics</li></ol></li></ol></li></ul><h3 id="b860e31a-6efa-4696-b14f-6efece23ea1f" class="">Azure SQL</h3><ol type="1" id="1f165c35-aadc-4725-a7f4-bf63facc1284" class="numbered-list" start="1"><li>SQL Server on VMs (IaaS)</li></ol><ol type="1" id="20afe59f-1910-4654-991e-8f988a1194ec" class="numbered-list" start="2"><li>Azure SQL managed instance (PaaS)</li></ol><ol type="1" id="2c5d9870-15e3-4d61-b37e-8adb2e87869c" class="numbered-list" start="3"><li>Azure SQL Database (PaaS)</li></ol><p id="617a9534-d713-494e-8dfe-92998aa95fac" class="">It also provides some services for some SQL vendors like MySQL, MariaDB and PostgreSQL. These all are PaaS.</p><h3 id="d7ff226b-8e0e-4d2b-b900-f51706fe39ff" class="">Non-relational data in Azure</h3><ol type="1" id="cfedf4ce-258b-41ed-a8d4-b93ad04781b8" class="numbered-list" start="1"><li>Blobs<ol type="a" id="1883fd17-a6c0-48eb-9049-ea5db672e4e2" class="numbered-list" start="1"><li>Block blobs<ol type="i" id="c1101f0c-cca0-4827-9f4e-bc19db5809d8" class="numbered-list" start="1"><li>Large, discrete, binary objects that change infrequently</li></ol><ol type="i" id="cbf76aa1-6f18-47f1-93a2-915d137526a9" class="numbered-list" start="2"><li>Up to 4.7 TB</li></ol></li></ol><ol type="a" id="5c91278c-18fc-4c6b-b766-110a0c02f0e7" class="numbered-list" start="2"><li>Page blobs<ol type="i" id="8e3df18f-8a0f-4ead-a2de-0614c2f772e1" class="numbered-list" start="1"><li>Used as disks for VMs</li></ol><ol type="i" id="6a9dc8ac-fd58-4df8-a70b-0d3da90283ef" class="numbered-list" start="2"><li>Up to 8 TB</li></ol></li></ol><ol type="a" id="a38fe397-798e-4a05-8ff2-79cd81083397" class="numbered-list" start="3"><li>Append blobs<ol type="i" id="e1cb30f1-1e40-44b2-827e-f1cdf5455da9" class="numbered-list" start="1"><li>Block blobs which are used to optimize append operations</li></ol><ol type="i" id="c6c2a464-2932-41f8-a94d-733dcef51d9f" class="numbered-list" start="2"><li>Up to 195 GB</li></ol></li></ol><blockquote id="c4e6ae2b-8854-4026-b859-3c3ac969062a" class="">Storage tiers: Hot, cold, archive with decreasing cost and increasing latency respectively.</blockquote></li></ol><ol type="1" id="fc6ddb3a-fe3a-4055-9a58-4d649d81a524" class="numbered-list" start="2"><li>Azure Data Lake Store Gen 2<ol type="a" id="0eab5b95-be8c-4965-8f88-9ce3a31a2079" class="numbered-list" start="1"><li>It is DFS built on blob storage</li></ol><ol type="a" id="4a19fd60-8d6e-4b33-9e45-71ba53321867" class="numbered-list" start="2"><li>It is a combination of ADLS Gen 1 and blob</li></ol><ol type="a" id="b5a92fdd-c749-41fa-b1a5-f88fcc9dae02" class="numbered-list" start="3"><li>It enables directory-level and file-level access control</li></ol><ol type="a" id="3b726294-bb99-4b3a-8e60-f50085f2406a" class="numbered-list" start="4"><li>This can be enabled by checking the hierarchical namespace option</li></ol><ol type="a" id="c26a141f-0c7f-42e7-84a8-f06f4f29a494" class="numbered-list" start="5"><li>We can opt while creating the storage account and as well as we can upgrade the existing storage account (one-way upgrade)</li></ol></li></ol><ol type="1" id="a5c1d09c-6166-4134-bf3e-f174ab0c3f24" class="numbered-list" start="3"><li>Azure files<ol type="a" id="ddad8699-d792-4369-bc2f-46bfd5867a99" class="numbered-list" start="1"><li>Can be accessed with an internet connection</li></ol><ol type="a" id="cd93c1cb-f236-45d0-a471-08fe7e3e7151" class="numbered-list" start="2"><li>supports the most common sharing protocols<ol type="i" id="47f6e51a-5237-44af-8104-f97bcfae650e" class="numbered-list" start="1"><li>Server message block (SMB)</li></ol><ol type="i" id="5beaa6ec-e690-43df-9d91-cb2597c82ee1" class="numbered-list" start="2"><li>Network file system (NFS)</li></ol></li></ol><ol type="a" id="4341ba1a-d393-4f13-9a9b-d075fe27af41" class="numbered-list" start="3"><li>Data is replicated and encrypted at rest</li></ol></li></ol><ol type="1" id="7f63dd05-5312-4ba7-b022-83084488e733" class="numbered-list" start="4"><li>Azure Table storage<ol type="a" id="cc51a2d0-2d0c-4496-8737-8e69e5e114e5" class="numbered-list" start="1"><li>It is a key-value storage for application data</li></ol><ul id="e8733205-3f59-4e76-89cf-3101f78b4650" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Learn more about it</span><div class="indented"></div></li></ul></li></ol><p id="cdc786c0-f670-4b67-a246-9d826df2a086" class="">Create <a href="https://github.com/MicrosoftLearning/DP-900T00A-Azure-Data-Fundamentals/blob/master/Instructions/Labs/dp900-01-sql-lab.md">Azure SQL</a></p><ol type="1" id="663472b4-c786-45f1-b555-9cec790f71b9" class="numbered-list" start="1"><li>Go to the server and then create a template for the server, you can use this code to create the same kind of servers next time. See : C:\Users\Futurense\Futurense Training\BigData\Cloud\AzureSqlServerTemplate.txt</li></ol><ol type="1" id="17dcb1dd-ff7c-4a7e-8f4c-2f5888acf926" class="numbered-list" start="2"><li>Go to the ‘template’ service and then create a new template and then run it.</li></ol><p id="296b2438-e30c-47f0-a54e-3fbd8bb818e0" class="">Steps:</p><ol type="1" id="bc93af76-0671-4233-a605-9fda16dbe97e" class="numbered-list" start="1"><li>Search for azure sql</li></ol><ol type="1" id="407c107f-f22f-4ef7-bc3a-da2583e0d701" class="numbered-list" start="2"><li>select the subscription, resource group, and database name, create a server or choose from existing. </li></ol><ol type="1" id="fd86dd08-11df-4f8e-a765-121c181f0210" class="numbered-list" start="3"><li>Select if you want to use the elastic pool (scaling up on high usage)</li></ol><ol type="1" id="cd9d35b2-13f9-4155-b5e3-b30c4e891a38" class="numbered-list" start="4"><li>select production or development environment</li></ol><ol type="1" id="d21b473c-a497-4e20-b1e2-eb6801ace07a" class="numbered-list" start="5"><li>select the type of compute storage</li></ol><ol type="1" id="6ee94706-96a1-4fd8-9b12-29c289b8b284" class="numbered-list" start="6"><li>Set public endpoint, allow access in firewall, </li></ol><ol type="1" id="a6a82f8d-812e-4c3b-a9e1-fdffe9dd6967" class="numbered-list" start="7"><li>When creating a server you need to give the server name, location of the server to be hosted (East US, etc.), authentication method (Azure Active Directory (AAD), SQL and AAD, SQL), server admin login name and password.</li></ol><ol type="1" id="d32b0350-3518-40ca-9b61-3b9e192c6e68" class="numbered-list" start="8"><li>Open the query editor and log in to write queries.</li></ol><p id="50383f13-960d-4701-92f1-a9fc92ee890e" class="">
+</p><h3 id="adeb9f33-c1a5-4c1a-a251-f0db68eaa30e" class=""><strong>Azure Data Factory</strong></h3><p id="864babd2-02af-47aa-9a70-65f94d4b4e81" class=""><a href="https://learn.microsoft.com/en-us/azure/data-factory/concepts-data-flow-performance">Optimizations</a></p><p id="8a9b351c-b24f-45f3-9edb-9a209be51b69" class=""><a href="https://learn.microsoft.com/en-us/azure/data-factory/tutorial-bulk-copy-portal">Use multiple tables in a ForEach loop</a></p><p id="aefec95a-84c3-4b2a-b9b6-0b44fac4628a" class="">In ADF we have the sections to perform data pipeline. They are: Home, Author / Integrate (to create pipelines), Monitor (monitor the execution of pipeline), Manage (Integration runtimes), and Learning Centre.</p><p id="cdda5588-4015-4a70-ab42-dcad846f9002" class="">Source</p><p id="d29fffd2-1b86-4ae9-b18b-26ab1295da5c" class="">Linked Service</p><p id="86b2498c-032a-41a9-82da-2609a865d9d6" class="">Dataset: Indicates the source data</p><p id="31cd1e1a-7358-4eef-b8ae-54d749f3e6ed" class="">Copy activity</p><p id="fdc5e9a6-503a-4c87-a1a6-7d76ea10063a" class="">Data flow activity  </p><p id="b5dacede-9ac0-4b7c-a4a8-bca34763ed92" class="">Sink</p><p id="414f3225-3acd-4992-beeb-aa8cbb315a92" class="">Integration runtime: Auto Resolve Integration Runtime, Self-Hosted Integration runtime, SSIS (SQL Server Integration Service) </p><p id="7a5b6e58-f171-4c65-975a-ae3fc4b9d6ff" class="">
+</p><p id="a395c8b8-cf9b-49df-99c4-c3fbe8922c67" class="">
+</p><p id="bef1bf23-903a-4e58-93bd-2a832c49a658" class="">
+</p><figure id="e93b77c1-8da8-4848-bbee-76d6af480770" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image4.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image4.png"/></a></figure><figure id="1d4fa519-b91e-4e96-927c-ec6cdc109b63" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image5.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image5.png"/></a></figure><figure id="15244b8a-3043-4405-a1aa-6ad092848904" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image6.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image6.png"/></a></figure><figure id="44c35fea-0e51-4f7d-9216-0fae6afc9f18" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image7.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image7.png"/></a></figure><p id="5fdea395-88c8-44c7-b4f3-504daa47b21a" class="">Click on the linked service → create new</p><p id="2c061502-0060-4fd7-92ff-421714c7697c" class="">Here enter the details</p><figure id="f95aa0d1-3e20-4f41-bf9e-bea70cf5632e" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image8.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image8.png"/></a></figure><p id="7b85ed59-479e-46bd-9f08-c1f16cf43d16" class="">Aggregation in pipeline</p><figure id="0f9a12fc-b0f2-4d24-bce5-709870c98c83" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image9.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image9.png"/></a></figure><p id="4a1e2ec4-1bf7-41a2-a828-b9d33272b985" class="">Create a data flow</p><figure id="2268f786-9102-42a1-a57d-3553addf7ca8" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image10.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image10.png"/></a></figure><p id="6a14dbef-0e30-42ca-8b28-d8d95542cafc" class="">This is the data pipeline having transformations</p><figure id="8546c6db-538d-4ddc-9a9e-0b966bb87bc9" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image11.png"><img style="width:700px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/image11.png"/></a></figure><p id="7e9268e7-b272-432a-a4dc-9996f255090f" class="">the related JSON file is: C:\Users\Futurense\Futurense Training\BigData\Cloud\MinSoldProductDflow.json</p><p id="5edad18e-92a3-4bcc-aced-edf6be2be177" class="">Sample 2 ADF</p><figure id="10f82bdd-47b9-4050-b096-bd5bfd1d50a4" class="image"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/Untitled.png"><img style="width:1706px" src="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/Untitled.png"/></a></figure><h3 id="4512e699-44f1-4d50-b862-222b58cab517" class="">Synapse ADF:</h3><ul id="421187aa-b863-4c80-b8d2-7cfb5950960a" class="bulleted-list"><li style="list-style-type:disc">Pipelines encapsulate a flow of activities that are orchestrated by an integrated runtime.</li></ul><ul id="8d48b518-84c5-4549-badb-c55e30bca4ee" class="bulleted-list"><li style="list-style-type:disc">Data movement and data transformation activities, external processing activities, control flow activities</li></ul><ul id="cae6c7ac-84b1-4a17-af33-c2b0622ac10f" class="bulleted-list"><li style="list-style-type:disc">There are linked services which provide access to data sources and processing platforms where activities can be run. The processed data is defined in datasets.</li></ul><p id="ac0cde51-94cb-422a-bbd7-cf1da7290b3a" class="">Steps to create a pipeline in Synapse ADF:</p><p id="5efd6f16-e2d1-47f6-96fe-40ae4f9dd533" class="">Go to the Integrate page and click Create New Pipeline</p><p id="a0fed8a7-c51e-4393-8e29-614b7496cd47" class="">Data flow: a common activity type to define a data flow and transformation. It consists of sources, transformations and sinks.</p><p id="cd5748bf-f804-45f8-90d5-6c7b149623b5" class="">We can debug the pipeline to test the data during pipeline building. </p><p id="d20157b3-3c27-4d16-ba36-0a95c4267fd6" class="">To run the pipeline we can create a trigger, a trigger can be used manually (runs immediately), schedule it(runs at regular intervals), and event(run when an event occurs such as new data comes)</p><p id="a36be103-3fd1-4c00-9a7c-643ac68730eb" class="">We can monitor the pipeline using the Azure Synapse Studio.</p><p id="210ae281-3649-4e9e-9fd6-5f402385c430" class="">We can also add the notebook activity into the pipeline to perform spark transformations</p><p id="03ab5ec1-8b02-4573-8be5-11aec3341f7f" class=""> </p><figure id="0646f672-31ae-4545-b0d6-df54f6ddbfa1"><div class="source"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/03_Perform_data_engineering_with_Azure_Synapse_Apache_Spark_Pools.pdf">03_Perform data engineering with Azure Synapse Apache Spark Pools.pdf</a></div></figure><figure id="f4f31f0d-808f-4c38-93eb-4b00a4c8828c"><div class="source"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/02_Build_data_analytics_solutions_using_Azure_Synapse_Analytics_serverless_SQL_pools.pdf">02_Build data analytics solutions using Azure Synapse Analytics serverless SQL pools.pdf</a></div></figure><h3 id="fbcfef9b-86a7-4a35-b101-a9bfeecb041a" class="">Spark in Synapse</h3><p id="062d8834-50dd-407f-b2ab-bdae499d0ac4" class=""><a href="https://microsoftlearning.github.io/DP-500-Azure-Data-Analyst/Instructions/labs/02-analyze-files-with-Spark.html">Analyze data in a data lake with Spark</a></p><p id="ed66a880-ece8-4bd5-a12a-70debe517d93" class="">In Hadoop memory and storage scaling are not independent. We add a new node to the cluster which leads to an increase in both memory and storage. But here we can scale resources independently.</p><p id="e1ce7622-a18b-4ac0-ac7f-d48bd035a154" class="">It supports distributed processing</p><p id="5aaf4ea3-08d1-469e-8f58-f621bcefb279" class="">It supports Java, Scala, Python, SQL</p><p id="fd62b6f1-dba8-46db-97df-fe33d1bc9466" class="">It provides spark pools and a dedicated and serverless MySQL pool.</p><p id="b2112ba8-69a3-459a-abcd-57379208e47a" class="">The Spark pool can be used when we want to use a data lake. Create an SQL pool when you want a warehouse.</p><p id="b9cdbcb8-550c-49c1-9e73-8efb992d89a4" class="">It has an external hive Meta store </p><p id="0fcb2025-5dd1-45a4-a26c-6e536f322778" class="">We can write queries as tables, and perform data frame manipulations. Make the data distributed to improve performance and scalability. We can partition the data by one or more columns. We can save the transformed data to an external table.</p><h3 id="6549f7ca-0657-401e-9404-34de6f42b435" class="">Azure SQL in Synapse</h3><p id="305098a6-cb1a-4f30-af52-cd56e1b43c40" class="">There are two ways to create a SQL pool in Azure Synapse Analytics</p><ul id="60c117ae-8d3c-413e-b4b5-86448ef5eb56" class="bulleted-list"><li style="list-style-type:disc">Serverless SQL pool: On-demand SQL query processing of data stored as files in the data lake. They are used for data exploration, and data transformation and they are a logical data warehouse.</li></ul><ul id="ad708128-e88f-4766-8706-07c1ada746fc" class="bulleted-list"><li style="list-style-type:disc">Dedicated SQL pols: Cloud scale relational database. Data is sorted in relational tables. Used in relational data warehouse and enterprise business intelligence.</li></ul><ul id="68f16bfa-bb16-4792-9e3f-0fbe03129576" class="bulleted-list"><li style="list-style-type:disc">Reading data of a delimited file<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2f314dd9-e4b6-4aa9-99fb-caf2fe27b780" class="code"><code class="language-SQL">select * from openrowset(
+bulk(’link’), 
+format=’csv’, 
+parser_version=2) 
+with (col data_type,..) as ROWS</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8a50f01c-f903-4f04-b76e-89ea5914c4f1" class="code"><code class="language-SQL">select JSON_VALUE(doc, ‘$col’),… 
+from openrowset(
+BULK(’link’), 
+format = ‘csv’,
+fieldterminator = &#x27;0x0b&#x27;
+fieldquote = &#x27;0x0b&#x27;
+rowterminator = &#x27;0x0b&#x27; )
+with (doc col data_type) as ROWS</code></pre></li></ul><p id="0fe45d23-910d-442b-a534-1544928c4187" class="">
+</p><p id="0ff8df1c-6ec8-48c9-9e3e-17366a400b6f" class="">Local MySql to Azure: Use Azure self-hosted integrated runtime to connect to on-premise.</p><p id="601d36f0-7d79-4441-970d-258f8084d610" class=""><strong>Logical data warehouse</strong>:</p><p id="e782e70d-abc7-4b5d-893e-38098204f6c6" class="">there is no actual database, we query files as real tables.</p><p id="6820f822-391c-495a-956b-576fd555b20a" class="">we use the openrowset function to read the data specify the file path (BULK ), format, header row, and delimiter.</p><p id="a7e8b45b-2743-439b-9752-27e21ac0f7b8" class="">use the with clause to specify column names and types.</p><ul id="6f9ee9d2-98e6-474d-83ea-9f53ef569a33" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Collation is used to search for specific character encoding, case sensitive, etc,</span><div class="indented"></div></li></ul><p id="05f4e830-a13b-4351-be4f-bc877af1d2e0" class="">
+</p><h3 id="e3c6514c-e678-427e-955b-959cd4c2dd81" class="">Data warehouse</h3><ul id="b4897dbd-d7e6-4f57-8e7a-a744f151315c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">WRITE MORE FROM PPT</span><div class="indented"></div></li></ul><p id="9cd8c9c3-7503-419a-a38c-5c7d59dd8064" class="">Data is stored in tables in a Data warehouse</p><p id="28db596d-1f59-4d14-8aa9-294cad2fa716" class="">Dimension key</p><ul id="0642a638-a941-42aa-a20c-980b989ba75c" class="bulleted-list"><li style="list-style-type:disc">Surrogate key:<ul id="876cc7a9-ed39-48aa-8b0a-2acde59b3ac7" class="bulleted-list"><li style="list-style-type:circle"> Uniquely identifies an instance of a dimension</li></ul><ul id="09bee5bd-03b4-4d31-8282-55410e033d41" class="bulleted-list"><li style="list-style-type:circle">Usually a simple integer value</li></ul></li></ul><ul id="5e308887-db54-4f55-8b17-ab6590d75792" class="bulleted-list"><li style="list-style-type:disc">Alternate key</li></ul><p id="b107c133-0ffe-4624-b693-ae9620fe0b80" class="">Compute + Storage </p><p id="a4d64d8f-99e6-4a21-8ab2-3e2ab24ac1c8" class="">DW Unit = CPU + memory + I/O</p><p id="675d2655-a83d-43f7-9e9a-4f86eaf74bff" class="">Control node: gives endpoint to connect to the server</p><p id="23abb566-3c01-4369-acff-02ac012c62a3" class="">compute node</p><p id="a5e104cf-7597-4642-bab7-91c1ce8ed361" class="">azure storage</p><p id="69b7c15d-338e-4b13-888a-0a6aab1d1f8f" class="">go to networking and add the allowed IP address </p><p id="efce38a2-1ea4-49de-a10e-b419f1e48023" class="">The data is stored in Azure storage, when you use the data for querying the data is got into the compute node.</p><p id="da80d5f7-1909-4cea-9d46-308ebe37cc59" class="">The data is stored as ADLS and BLOB (files) in distributions. The data is stored in compute nodes as relational tables. The data is converted to the tables.</p><p id="8126bd10-e3ed-41ef-963b-a1b69cd87fc7" class=""> DMS (data movement service) moves similar data into similar compute nodes when we use group by etc.</p><p id="00e69c5c-bfc1-47f8-b80f-cdd098d48c3c" class="">Data distribution: 1) hash distribution, 2) replicate the small table to all the compute nodes, 3) use round-robin to evenly distribute the data.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dfc28cf5-027f-41c9-bcab-f64542dd1ea6" class="code"><code class="language-SQL">create table schema.table_name
+(
+col_name data_type, ..
+)
+with (
+DISTRIBUTION = HASH (col_name)
+							| replicate
+							| round_robin,
+INDEX_TYPE)</code></pre><h3 id="8b32b27a-413e-4b42-829c-9d9b030e99be" class="">External table</h3><p id="8e222af7-03f5-4697-b614-3f3df743e6c8" class="">defines table metadata for files in a data lake</p><p id="070d9943-04eb-4885-a3a8-a7d86fd4f18f" class="">useful for reading the data into staging tables directly from the data lake</p><p id="038bec1e-46fc-45c9-b0d5-cef3a86d15cc" class="">Statistics: it has data about a single column. Statistics for query optimization are binary large objects (BLOBs) that contain statistical information about the distribution of values in one or more columns of a table or indexed view. The Query Optimizer uses these statistics to estimate the cardinality, or number of rows, in the query result.</p><h3 id="fabbbfc5-8f63-404c-b832-bd98db2d28c3" class="">Loading data into a warehouse using SQL operations</h3><p id="f16197d3-e21a-4c69-a6b6-ca101f50eb0d" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/09-Load-Data-into-Data-Warehouse.html">See this page to see the loading of data</a></p><ul id="602cf1a9-c039-4bdc-8dc7-44ed457cf972" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Write notes based on the document</span><div class="indented"></div></li></ul><p id="2c0d1076-be3d-4396-8006-a35ebcbc00b8" class="">For loading data into a table in the warehouse we have to first load the data into a staging table from the file, and then we can load the data in the staging table into the original table.</p><p id="334ff396-ae8b-450e-b2ff-ce7763c9a3dc" class="">We can do this using the copy-into-command</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8533d9af-586a-4884-8be9-c77441421733" class="code"><code class="language-SQL">copy into stage_table1
+(cols) 
+from &#x27;location&#x27;
+with(
+file_type = &#x27;csv&#x27;, maxerrors = , firstrow =, errorfile = &#x27;errorfile_location&#x27; );</code></pre><p id="56e7a949-5940-4aba-b7f3-ccc96f6c77c1" class="">Now, use the create table as (CTAS) to load the data from the stage into the original table</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7e406da0-24a8-4e03-bbe4-6bb9e99d322f" class="code"><code class="language-SQL">create table original_table
+with(
+distribution = hash|round_robin|replicate
+clustered columnstore index)
+as
+select * from dbo.stage_table1;</code></pre><p id="9b3d54a9-70ba-4b84-8a7d-22e8d3bacaae" class="">
+</p><p id="fbebfe50-18f1-4e97-a24e-3a0ff0e5cd9f" class="">Techniques to perform SCD operations in a table</p><p id="3f74540d-a4c1-42b5-9505-c300c72e4e66" class="">Polybase is used to load the data parallel into the table.</p><p id="66b7ff85-6f73-4363-8abc-751192396a4b" class="">
+</p><h3 id="485891ea-3297-431b-94b2-f4fa71c2e347" class="">Cosmos DB</h3><p id="b9b65f0e-9bc1-45b6-8656-9685031dd140" class="">It has API to connect from NoSQL, PostgreSQL, MongoDB, Cassandra, Table, Gremlin</p><p id="d0c9f254-9c96-4010-babf-baa6664b9b89" class="">Create an Azure Cosmos DB account. It provides 25GB storage and 1000RU/s is free to use. 1RU = cost of reading 1KB item.</p><p id="9265fdfb-b42d-4693-81b4-9359a9f1719e" class="">It has automatic global replication</p><p id="746d91eb-0038-4346-be56-7a3d12e985f5" class="">It has 5 consistency levels: Strong, bounded staleness, session, consistent prefix, and eventual.</p><p id="25f9e60a-f6c9-45a1-bc76-a62c82431897" class="">
+</p><h3 id="3703d8da-828d-4444-9032-3a1ffb2deadc" class="">HTAP (Hybrid Transactional and processing patterns)</h3><p id="c247289c-1db2-4179-b31a-395f89afc580" class="">
+</p><p id="08009b32-362a-4916-8506-fa4519c1dbd6" class="">
+</p><p id="02c881a6-f049-4a03-b07a-c4a76b2ee130" class="">
+</p><p id="3ace6949-f2ce-431b-b060-d802973e9d20" class="">
+</p><p id="7683516e-8b14-479a-be97-28c781f39943" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/14-Synapselink-cosmos.html">Azure Synapse Link for Cosmos DB</a></p><p id="a36999c5-92d7-4cb8-9ff1-17c0848eaebe" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/14-Synapselink-cosmos.html">Azure Synapse Link for SQL</a></p><p id="312921c4-a4bf-4316-8588-2b6649c5c239" class="">
+</p><p id="434deac8-d8c7-4701-874d-0ff74b22ed9b" class="">
+</p><p id="1e645c03-cb77-4261-b58c-7a4a14ceeeaf" class="">
+</p><h3 id="751a5db2-9290-4e4d-bd9e-300a223a5d16" class="">Azure DataBricks</h3><p id="6c86fd99-3b80-4d3c-81bf-0050f7dd1a05" class="">Apache spark clusters</p><p id="ecd615a3-5a0d-4e0a-abb5-ef8d829a387a" class="">Databricks file system</p><p id="d7a7405a-b4cf-4056-b1d4-3a1f11d5234a" class="">notebooks</p><p id="4b65a134-3450-4929-8486-50e455cb4f4a" class="">meta store</p><p id="2217f409-8eb4-4e16-a4b4-1da25a1bc8fb" class="">Delta Lake: gives relational database capabilities</p><p id="5fa396d8-9248-469d-acd2-4f9225d14dc4" class="">SQL warehouses</p><p id="1b5133db-3c40-4af9-b82d-e209cd444c86" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/23-Explore-Azure-Databricks.html">Explore Azure Databricks</a></p><p id="2fbbd46f-4bb7-480c-9ba1-dcb42835eeae" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/24-Analyze-Files-in-Azure-Databricks.html">Use spark in Databricks</a></p><p id="5ddffdf2-6b87-422a-8699-3562d4a544a0" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/27-Azure-Databricks-Data-Factory.html">Running a Databricks notebook using ADF</a></p><p id="0ab8ee69-199b-48ab-84d3-9d8bb3d62f4c" class=""><strong>Clusters</strong>: All purpose (present every time) and job purpose (creates the cluster on running a job)</p><p id="1f01f517-7b1a-41ef-847f-f68bdbc6ccc3" class="">The job cluster is auto-deleted when the execution is completed. This is the advantage of using Databricks, we can get the job cluster here. </p><p id="e7bcdcaa-c7ec-4967-a688-8954c2e3a762" class="">
+</p><p id="80b4a2c1-9749-4381-a2e5-a1b1ef9908cf" class="">
+</p><h3 id="7e8769e4-ab54-4eea-8dd5-4e23ef99c139" class="">Data Lakehouse</h3><p id="6b8ae4e2-1eb2-47d3-a8a7-283c2d8c739d" class="">
+</p><p id="114d06e2-f8b6-48c7-9311-a34fba987aee" class="">Database, Data warehouse, Data lake, Data lake house, Delta lake, Delta lake house.</p><p id="d69d64ee-f0c8-4daa-835a-627b7002a236" class="">80% of data is from structured and semi-structured data. </p><p id="c17e4ae0-2ded-42db-875f-e80338262b21" class="">The data in the Data lake is moved into the warehouse and then used for analysis.</p><p id="6ccdddd9-ef8c-4ff0-8879-61764c5d5a77" class="">In on-premise ELT (Stagingn area)</p><p id="630c89e6-37ef-42a4-a274-d042b84f5ea3" class="">In cloud ETLT (Data lake)</p><p id="bdbfc426-f552-4a1a-85e9-b20f765ad715" class="">Data lake house: Azure Synapse Analytics, Databricks, snowflake, redshift</p><h3 id="8d04bb7c-3a61-4f88-84c9-3c5d04b99794" class=""><strong>Delta Lake</strong></h3><p id="9e90c798-a699-470e-9b96-1956cc9d0c87" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/07-Use-delta-lake.html">See this lab</a> for Delta Lake in Synapse</p><p id="a321b778-c7c5-4655-a3bd-211d498cd11d" class=""><a href="https://microsoftlearning.github.io/mslearn-databricks/Instructions/Labs/03-Delta-lake-in-Azure-Databricks.html#:~:text=Delta%20Lake%20adds%20support%20for,files%20in%20the%20data%20lake">See this lab for data bricks</a> </p><figure id="0785e992-1ff5-4794-b291-88a429d4a11d"><div class="source"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/SparkDataLake.html">SparkDataLake.html</a></div></figure><figure id="16d8eeb8-7241-4401-9c0c-41cedb0e0c3c"><div class="source"><a href="Azure%20Notes%20bf859c155bd642919513930bc14b51f3/SparkDataLake%201.html">https://prod-files-secure.s3.us-west-2.amazonaws.com/d7664c3c-67b7-43ec-a010-9fe4031e31d8/7a42a1e2-28eb-4133-b0b2-24b4c88b5f26/SparkDataLake.html</a></div></figure><p id="4f5dd451-3004-4e19-91ff-b3d39aa9a022" class="">
+</p><p id="85f40922-f875-4421-9542-fc7e29e9cc0e" class="">Adds relational database properties (ACID) </p><p id="b18b5d6b-5dfd-49fa-89b5-223d3f7af4cd" class="">Data versioning and time travel</p><p id="f20623e0-975b-445b-a500-1a2c5095f0c0" class="">support for both batch and stream data</p><p id="58ee42c5-f949-4b1d-8a28-49b97d69e7c7" class="">standard formats and interoperability </p><p id="1ce0f706-f311-4212-9dad-a792606db04b" class="">The data is stored in ADLS only</p><p id="8286e3ae-2549-4b32-934f-385b2f785235" class="">We first load the data into a dataframe </p><p id="e8b3f625-58a5-4910-a3b0-6077a0d954bd" class="">then we do this</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="be78d739-6161-4c90-8013-a9431069db79" class="code"><code class="language-SQL">//create a delta lake table
+delta_table = DeltaTable.forPath(spark, table_path)
+
+//Make conditional updates
+
+delta_table.update(condition = &#x27;category&#x27; == &#x27;accessories&#x27;, set = {&quot;price&quot; : &quot;price * 0.9&quot;} )
+
+// Get versioned data
+
+df = spark.read.format(&quot;delta&quot;).option(&quot;versionAsOf&quot;, 0).load(delta_table_path)</code></pre><p id="42fed829-7bc6-4247-b7c9-dfffa9a85e87" class="">
+</p><p id="ccdf57fc-f658-428c-aa09-cb978bc2a478" class=""><strong>Create catalog tables</strong></p><ol type="1" id="d4503a3d-7a4f-474c-a528-479056ec079c" class="numbered-list" start="1"><li>Managed tables<p id="6343c084-26d2-4016-8f10-a739409b848c" class="">Defined without a</p><p id="407ea46c-4d33-4ab5-8be7-f7536a071f20" class="">created in database</p></li></ol><ol type="1" id="a7f478b5-d12a-41e0-b124-303a38887ced" class="numbered-list" start="2"><li>External tables<p id="8853cc1e-14c2-4295-9cc7-af275cc56cae" class="">created in workspace</p><p id="c99de1ae-5f40-4882-97c3-07088f5bddc3" class="">Defined using a location</p><p id="09423b5a-72a0-465b-b4cd-16e593192f0e" class="">dropping the table doesn&#x27;t affect the files.</p><h3 id="9bf6e023-4d8a-4a81-b8f8-f501463b10b9" class="">Data lake house</h3><p id="3b8045a1-bb4f-4125-bab3-e8f7df5abc75" class="">Best of both data lake and data warehouse</p><p id="df9f7bf1-6a33-43cd-95a2-d5e55685f466" class="">Databases store the data in a proprietary format</p><p id="501d9915-fc4c-46c8-888c-9f9106cbfa05" class="">In the Data Lake house, the data is stored in files only, the compute can be serverless and dedicated spark pool, and we can have schema also.</p><p id="5bc1ae79-7836-499f-88ac-f15ebb0b0679" class="">
+</p></li></ol><h3 id="23e050bd-6c17-4cb8-bb8e-6ed6839b975f" class="">Azure Key Vault</h3><p id="cc5c74a5-3af0-4fae-8b02-19828da7b1a8" class="">Safely keep your keys and other keys that cloud apps and services use:</p><p id="89042cca-3e2a-4fd0-a938-596e09645fe3" class="">It has a vault, vault owner, and vault consumer</p><p id="69443a56-6de3-4ace-8927-cce6850ec46a" class=""><a href="https://learn.microsoft.com/en-us/azure/databricks/getting-started/connect-to-azure-storage">Connect ADLS with Databricks</a></p><p id="78df3990-d1f1-498e-a508-eea343a3e3dc" class="">
+</p><h3 id="855df80b-ee46-4c1f-bb55-0c348a9a48ad" class="">Azure Stream Analytics</h3><p id="cd7db619-7b41-4257-9ead-c5dce87dbae8" class=""><a href="https://aka.ms/dp900-stream-lab">Lab for stream analytics</a></p><p id="b04d460b-d21d-47f5-9fa7-7a6108cde5ad" class="">Real-time data processing with Azure Stream Analytics</p><p id="14c8efc9-c00a-45ca-953b-897bf9eaf39b" class="">Create an Azure Stream Analytics job or an Azure Stream Analytics cluster</p><p id="08e75e7f-0897-43cc-a1c2-63ac3b550fc6" class="">Ingest data from input, such as Azure Event Hubs, Azure IoT Hubs</p><p id="aba38aa0-bde7-4842-a4c4-9845934fb88e" class="">Language used to query real-time log data: KQL (Kusto query language)</p><p id="c0969dc0-f122-42ec-953a-d2e64182b8a1" class=""><strong>Azure IoT Hubs</strong></p><p id="e8a55191-fb91-43ba-9dcf-7bfded7440ba" class=""><strong>Azure Event Hubs</strong></p><p id="cf6c74cb-d9b0-4614-9dde-10a8b4d88364" class=""><a href="https://aka.ms/mslearn-stream-lab">Lab for event hubs</a></p><p id="8d2d23b1-10be-401c-be86-a865b1e5b953" class="">The event hub is to get data produced by distributed software and devices.</p><p id="65b32df3-3671-421d-83e0-75816711ebeb" class="">It provides a distributed stream processing platform.</p><p id="2521b289-f365-4910-94ba-db9f32fe1bc0" class="">We can partition the data to event publishers</p><p id="3fd19141-353b-4040-b7ee-0b77355ce9c3" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/18-Ingest-stream-synapse.html">Stream Analytics in Synapse</a></p><figure id="a6692785-f2a3-4bb0-a715-474c43acea15"><div class="source"><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/18-Ingest-stream-synapse.html">https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/18-Ingest-stream-synapse.html</a></div></figure><p id="18e9392d-903a-4b83-b549-7462f9e8e305" class="">
+</p><p id="455bda98-f30d-4ce3-9ab6-4dc23a893bfb" class=""><a href="https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/19-Stream-Power-BI.html">Live analysis of streaming data with PowerBI</a></p><p id="76c96528-5e70-4b3d-aaa9-115758e53fed" class="">We use the “copy data” activity because it is faster. </p><p id="0c781eba-f0e3-40e3-b58e-8ae89a549e37" class="">For copying data to an SQL database, It uses PolyBase. </p><p id="d622ddd8-105d-4491-a1cb-b7543594f7d3" class="">If the source is not compatible with PolyBase, then the staging area can be used (should enable) from the staging area we can use poly base.</p><p id="f18a6b13-3090-48ec-8e25-8d9ba7e53a13" class="">
+</p><h3 id="bc573207-6a68-4ea3-9b96-e9ff420a267d" class="">Creating Event and hub</h3><ol type="1" id="606049bc-9778-4ab7-bbbc-e3e913330923" class="numbered-list" start="1"><li>Create an event hub (namespace).</li></ol><ol type="1" id="a7c53123-9514-4c09-8a2c-b325010bcb79" class="numbered-list" start="2"><li>Go to resource, create an event hub</li></ol><ol type="1" id="babd55c0-872a-428f-9fde-e749fed90f1f" class="numbered-list" start="3"><li>Go to event hub namespace → shared access policies</li></ol><ol type="1" id="34df2db0-13b7-490c-8c46-8d4e720ad7dd" class="numbered-list" start="4"><li>Open the code put the connection string and device hub ID</li></ol><p id="2a0a8c0e-eb98-4297-b85e-a08c7649eb72" class="">
+</p><h3 id="fa66d02e-ea70-4ad1-870b-fe3b7cf62b1d" class="">Azure Functions</h3><ul id="9d6372d6-0069-42f9-9c06-0b65c8597dbb" class="bulleted-list"><li style="list-style-type:disc">Run code based on HTTP requests</li></ul><ul id="0046d104-b44f-413b-b264-b4ad36839002" class="bulleted-list"><li style="list-style-type:disc">schedule code to run at predefined times</li></ul><ul id="a75c2e12-ac74-41a0-983b-332990566939" class="bulleted-list"><li style="list-style-type:disc">Process new and modified Azure cosmos DB documents, azure storage blobs, azure queue storage messages</li></ul><ul id="ad688e44-a5ac-474b-be9c-04c3c555b43c" class="bulleted-list"><li style="list-style-type:disc">Respond to Azure event grid events by using subscriptions and filter </li></ul><ul id="be96eb9e-ad70-4a05-98d3-b798bc1bb9f3" class="bulleted-list"><li style="list-style-type:disc">Respond to high volumes of Azure event hubs events</li></ul><ul id="8a68bd42-78be-41f0-9df6-a991a3d56c8e" class="bulleted-list"><li style="list-style-type:disc">Respond to Azure services bus queue and topic messages</li></ul><p id="e08838d1-0c23-484d-9d16-19c840dcee09" class=""><strong>Steps:</strong></p><ol type="1" id="bc31a70f-42bb-4e7a-b190-a46a05533278" class="numbered-list" start="1"><li>create function app: choose runtime stack(Python, .NET, Node, Java etc.), choose (operating system) and hosting type (serverless, premium(auto scale), isolated)</li></ol><ol type="1" id="266715d9-6b23-4e19-b3b7-5b1cf25b54d0" class="numbered-list" start="2"><li>Create a function: Go to the functions tab → create a trigger (HTTP, blob etc.) </li></ol><ol type="1" id="d771b3e3-5ec5-487f-a24b-d23176686e98" class="numbered-list" start="3"><li>open the trigger and click on code + test. Here you will write the logic of the trigger working. </li></ol><ol type="1" id="7b06c969-c42d-4585-8ed5-ce513c3e1a14" class="numbered-list" start="4"><li>Click on the function URL and copy it.</li></ol><ol type="1" id="597ac3f7-ceac-4306-9698-9a4ed4120345" class="numbered-list" start="5"><li>Open the URL and the code will be triggered by the trigger.</li></ol><p id="fbda205c-4b7d-4cb3-9ab0-7aac63e081ef" class="">
+</p><h3 id="6b660eb2-57ca-45dc-9335-e9724cd1eb00" class="">Batch processing and stream processing</h3><p id="838ca56d-dc04-4606-9180-91a03e788daf" class="">Bounded datasets: Finite unchanging datasets to analyze. Week, month, year</p><p id="e301483f-2bb1-4dda-a629-9d3187f123d6" class="">Continuous: </p><p id="63aca8df-e410-407c-a150-33120509eace" class="">Tracking of delivery of an item from E-commerce website, continuously monitored data.</p><table id="78ad4a2e-2c11-467e-bdfc-954b365ca125" class="simple-table"><thead class="simple-table-header"><tr id="3e89e8a1-e9c8-441c-ba95-7d477258ca31"><th id="xwFc" class="block-color-blue_background simple-table-header" style="width:349px">Batch</th><th id="Ey]s" class="block-color-blue_background simple-table-header" style="width:349px">Stream</th></tr></thead><tbody><tr id="c9206ecb-5e16-4b41-8228-311169243cbf"><td id="xwFc" class="" style="width:349px">Bounded, finite datasets</td><td id="Ey]s" class="" style="width:349px">Unbounded, infinite datasets</td></tr><tr id="d8fdbed9-4372-433a-94f1-9ef7c93e3803"><td id="xwFc" class="" style="width:349px">Slow pipeline from data ingestion to analysis.</td><td id="Ey]s" class="" style="width:349px">Processing immediate, as data is received</td></tr><tr id="a189f8d5-5705-46b0-887f-854d3b25f1e3"><td id="xwFc" class="" style="width:349px">Latency in minutes, hours considered acceptable</td><td id="Ey]s" class="" style="width:349px">Latency usually must </td></tr><tr id="1dbc7ec8-96ce-4cc0-89f4-8a983d1b69d7"><td id="xwFc" class="" style="width:349px">single global state of the data </td><td id="Ey]s" class="" style="width:349px">No global state, only history events received</td></tr></tbody></table><p id="947862ff-4bee-4c83-b160-1496a147bf93" class="">
+</p><p id="f7089075-900e-46fa-ab79-d479b248578b" class="">Structured streaming</p><p id="57b1916a-2540-46d9-a718-24b7579a08ce" class="">It is an high level API which controls </p><p id="3698a406-7475-4b5f-a11c-ad92afad39a7" class="">
+</p><p id="881eaab8-bc7d-4b0e-9c74-efa197c0a1c9" class="">Triggers:</p><p id="f6512d40-e7b2-43c2-a5b7-e0dcdcc244b8" class="">When you want to apply some functions on the same data again and again.</p><ul id="57294ded-73fe-41a6-b6e6-10dc7edd8eee" class="toggle"><li><details open=""><summary>Triggers</summary><p id="ed546db0-2f52-456a-a5d0-1b884cf121fd" class="">Default</p><p id="53b60536-4064-4e1b-adaf-545cc538c8f0" class="">Fixed interval</p><p id="74468616-acfa-4d51-b806-0d4d0a40a0ec" class="">one-time micro batch</p><p id="daccdca5-3740-422d-b6cc-0cc6c393eece" class="">continuous with field checkpoint interval</p></details></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="353ff996-642d-4605-a4ad-ccfba972c0a0" class="code"><code class="language-SQL">df.writeStream.format().queryName(&#x27;query_name&#x27;)
+	.trigger(processinTime = &quot;20 seconds&quot;).start()</code></pre><p id="6ca5c8c2-139f-4060-9bb8-60434c422770" class="">Analysis using this trigger</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="35d39d20-bbaf-43cc-b944-04f26dbcb955" class="code"><code class="language-SQL">spark.sql(&quot;select c, count(c) from query_name group by c&quot;).display()</code></pre><p id="616ad4a8-5c6d-42ee-99c6-288f59d9f3e0" class="">The above query runs for 20 seconds each.</p><p id="f6e7e4e0-31a0-43e0-b30b-221d317b2ea1" class=""><strong>Streaming sources</strong></p><p id="8218ac07-e930-4dfe-802b-681b681a8f86" class="">event streaming</p><p id="6ebdcf48-0e8f-44a9-baf4-b27a322bae7f" class="">azure event hubs</p><p id="84e74764-508b-491e-bd58-31b51a989601" class="">tables in delta lakes</p><p id="74236a16-4814-4aca-9dde-1a88e2064684" class=""><strong>Streaming sinks</strong></p><p id="98a00115-3f4f-438a-ba4b-f2bbdadcff93" class="">event streaming</p><p id="c6a0870f-0184-4c5d-b6c4-530082efc2da" class="">azure event hubs</p><p id="a3cfe732-7c2d-4cbf-8919-566238c89bd7" class="">tables in delta lakes</p><p id="e3a806ae-b616-4b5a-bd75-3f321efd9c20" class="">Arbitrary batch sink </p><h3 id="b03762de-5a50-49d6-a0a2-9907b4e7be95" class="">Auto loader</h3><p id="6c6f796e-e190-46ff-ad1c-2e54007833db" class="">Optimized cloud file source for apache spark that loads the new data efficiently from the cloud storage into Kafka.</p><p id="bda03aa7-c70d-40f7-a746-fb210988f31c" class="">It allows seamless data ingestion</p><p id="f2e9f459-9f2c-45cc-8203-7f45173e87a0" class="">Scalable</p><p id="ed38c69d-eadc-452b-9ef2-e867f5c30c15" class="">easy to use: automatic discovery of new files</p><p id="dcfd0285-4f93-436f-a7f1-aa672b548c22" class="">schema inference: infers schema and detects schema drift</p><ul id="239f6ef4-19e6-473b-81ec-8726dba94ed2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">data rescue: configure</span><div class="indented"></div></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f3bda845-a360-40f4-a56a-35ec91a75253" class="code"><code class="language-SQL">df = spark.readStream.format(&quot;coudFiles&quot;).
+option(&quot;cloudFiles.format&quot;, &quot;csv&quot;)
+.option(&quot;cloudFiles.schemaLocation&quot;, &quot;folder&quot;)
+.load(&quot;folder_of_files&quot;)
+// when you mention the format as cloudFiles it is automatically taken as auto loader</code></pre><p id="df4414c4-5db5-4733-b87a-1da06df215da" class="">If the new file has more number of columns then, the new schema changes</p><p id="c548f10b-9f2a-4c42-b9ac-a2edc4ef5346" class="">
+</p><p id="70a7303d-59a1-4b1f-bd03-2059d086853e" class="">
+</p><p id="3f649bb1-7268-49d4-8113-7d3e4d4930b1" class="">
+</p><p id="5efb7a4e-7fc2-4231-841c-35249d1a5d54" class="">
+</p><p id="dc8eb915-f512-44ca-ab61-0f0abe996753" class="">
+</p><p id="aa9fe0d9-5358-4627-863c-b6fd3b2d8d21" class="">
+</p><p id="a1552091-3334-419c-822e-f347ac65a7c3" class="">
+</p><p id="0a0ebacf-dce7-41c5-b709-186cd4861154" class="">
+</p><p id="9644a6f6-351c-4be3-ac36-750be427bf9c" class="">
+</p><p id="df927e75-f3d8-49c2-b544-abcf49f39605" class="">
+</p><p id="6ac63d3c-49c1-4da5-b9a6-075fb93369aa" class="">
+</p><p id="a0cee29c-9530-43c3-b5c4-de32dc4eac42" class="">
+</p><p id="6c3c8947-2318-4697-a60f-cecac0eb9391" class="">
+</p><p id="20a90f73-5d23-42f0-bf1a-d69f34abffed" class="">
+</p><p id="76923846-3017-40a3-80e4-1256ceb0a6f6" class="">
+</p><p id="738dcb3c-01e6-4325-9cfe-5d790ccd4b72" class="">
+</p><p id="b4a8f0f2-687f-481c-b801-4b3c8a6bbbd0" class="">
+</p><p id="97c10902-9fab-46db-a3fe-fe2ba0d140af" class="">
+</p><p id="ee5664c7-d772-4e73-883e-c33b884988da" class="">
+</p><p id="8ef85960-242f-4c3a-a62b-91254f50ae46" class="">
+</p><p id="2a425041-c762-4c88-bb7f-cc285d1b7dfd" class="">
+</p><p id="2eb3f603-7cc0-44ab-a561-6e3b971e6394" class="">
+</p><p id="b3ad5904-a758-4936-9d0c-360ebb3dc58d" class="">Project</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="faaf0ae5-5bac-46c6-a601-179ec82d70e4" class="code"><code class="language-Plain Text">-- create SCHEMA saiDB;
+-- use saiDB;
+
+-- select name from sys.tables;
+-- select DB_NAME() as curr;
+
+-- CREATE TABLE saiDB.fhvBases
+-- (
+--     [License Number] VARCHAR(50),
+--     [Entity Name] VARCHAR(255),
+--     [Telephone Number] BIGINT,
+--     [SHL Endorsed] VARCHAR(3),
+--     [Address Building] VARCHAR(10),
+--     [Address Street] VARCHAR(255),
+--     [Address City] VARCHAR(50),
+--     [Address State] CHAR(2),
+--     [Address Postcode] INT,
+--     [GeoLocation Latitude] FLOAT,
+--     [GeoLocation Longitude] FLOAT,
+--     [GeoLocation Location] VARCHAR(50),
+--     [Type of Base] VARCHAR(50),
+--     [Date] DATE,
+--     [Time] TIME
+-- )
+-- WITH (
+--     CLUSTERED COLUMNSTORE INDEX
+-- );
+
+COPY INTO [saiDB.fhvBases]  
+from &#x27;https://projectaadls.blob.core.windows.net/files/FhvBases.json&#x27;
+WITH
+(
+-- CREDENTIAL = (IDENTITY = &#x27;&#x27;, SECRET = &#x27;&#x27;),
+FILE_TYPE = &#x27;CSV&#x27;,
+fieldterminator =&#x27;0x0b&#x27;
+,fieldquote = &#x27;0x0b&#x27;
+,rowterminator = &#x27;0x0c&#x27;,
+MAXERRORS = 10
+);
+
+-- COPY INTO [saiDB.fhvBases]  
+-- FROM &#x27;https://projectaadls.blob.core.windows.net/files/FhvBases.json?sp=r&amp;st=2023-10-27T10:11:27Z&amp;se=2023-10-27T18:11:27Z&amp;sv=2022-11-02&amp;sr=b&amp;sig=7M9fTOJ%2BfopuECQ9ZKwF4PGcGqM558tfnCHDA5o4TlY%3D&#x27;
+-- WITH
+-- (
+--     FILE_TYPE = &#x27;CSV&#x27;,
+--     fieldterminator =&#x27;0x0b&#x27;,
+--     fieldquote = &#x27;0x0b&#x27;,
+--     rowterminator = &#x27;0x0c&#x27;,
+--     MAXERRORS = 10
+-- );</code></pre><p id="10283fc9-0461-4cac-ad45-0106699e0ccb" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">SparkDataLake.html</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a-/AFdZucoNMvhuMJvxmBbBA7VeWe7W1Ztz4VOVw0UlQxUqxQ=s100" class="icon user-icon"/><span><b>Sai Prathap</b> <time style="font-size:0.8em">Oct 18, 2023, 2:22 PM</time></span></span></div><div style="padding:0.2em">It has the notebook that is run. It has outputs</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>
